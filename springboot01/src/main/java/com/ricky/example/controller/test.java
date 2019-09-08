@@ -86,6 +86,7 @@ public class test {
     public Object getIntercepter(){
         params.clear();
         params.put("success","成功");
+        System.out.println(111);
         return params;
     }
 
