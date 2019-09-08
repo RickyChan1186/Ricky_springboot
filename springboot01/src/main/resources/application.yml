@@ -1,0 +1,9 @@
+spring:
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  devtools:
+    restart:
+      trigger-file: trigger.txt
+
+user.filePath: C:/Users/Ricky/Desktop/image/
+
