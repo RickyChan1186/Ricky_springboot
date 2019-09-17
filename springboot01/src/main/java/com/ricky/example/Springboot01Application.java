@@ -8,6 +8,8 @@ import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import javax.servlet.MultipartConfigElement;
 
@@ -16,6 +18,8 @@ import javax.servlet.MultipartConfigElement;
 @SpringBootApplication
 @EnableAutoConfiguration
 @ServletComponentScan
+@EnableScheduling
+@EnableAsync
 public class Springboot01Application {
 
 	public static void main(String[] args) {
