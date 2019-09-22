@@ -1,5 +1,7 @@
 package com.ricky.example.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ricky.example.entity.User;
 import com.ricky.example.handle.MyException;
 import org.springframework.web.bind.annotation.*;
@@ -88,6 +90,15 @@ public class test {
         params.put("success","成功");
         System.out.println(111);
         return params;
+    }
+
+    @PostMapping(value = "/postMethod")
+    public Object postMethod(@RequestBody String json){
+
+        JSONObject object = JSON.parseObject(json);
+
+        System.out.println(object.toJSONString());
+        return  object;
     }
 
 }
