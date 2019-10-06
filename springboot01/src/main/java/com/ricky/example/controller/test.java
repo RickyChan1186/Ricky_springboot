@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.ricky.example.entity.User;
 import com.ricky.example.handle.MyException;
+import com.ricky.example.util.RedisUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -18,6 +20,10 @@ import java.util.Map;
 public class test {
 
     Map<String,Object> params = new HashMap<>();
+
+    @Autowired
+    RedisUtil redisUtil;
+
 
     @RequestMapping(value = "/getMethod")
     @ResponseBody
@@ -99,6 +105,17 @@ public class test {
 
         System.out.println(object.toJSONString());
         return  object;
+    }
+
+    @RequestMapping(value = "/testSetRedis",method = RequestMethod.GET)
+    public void testSetRedis(){
+        redisUtil.set("value","value");
+    }
+
+    @RequestMapping(value = "/testGetRedis",method = RequestMethod.GET)
+    public String testGetRedis(){
+        return (String) redisUtil.get("value");
+
     }
 
 }
