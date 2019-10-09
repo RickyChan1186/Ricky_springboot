@@ -1,7 +1,10 @@
 package com.ricky.controller;
 
+import com.ricky.domain.product;
 import com.ricky.service.ProductService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,7 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/product")
 public class ProductController {
 
-    @Autowired
+    @Value("${server.port}")
+    private String port;
+
+   @Autowired
     public ProductService productService;
 
     @GetMapping(value = "/listProduct")
@@ -24,6 +30,13 @@ public class ProductController {
 
     @GetMapping(value = "/findById")
     public Object findById(int id){
-        return productService.findById(id);
+        product p = new product();
+        p = productService.findById(id);
+        product result = new product();
+        BeanUtils.copyProperties(p,result);
+
+        result.setName( result.getName()+" From "+port);
+
+        return result;
     }
 }
