@@ -1,5 +1,7 @@
 package com.ricky.controller;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -381,6 +383,21 @@ public class createExcel {
         //这时候把创建好的excel写入到输出流
         workbook.write(outputStream);
         outputStream.close();
+    }
+
+    public static void main(String[] args) {
+        JSONObject jsonObject = new JSONObject(true);
+        JSONArray jsonArray = new JSONArray();
+        for(int i=0; i<3; i++){
+            JSONObject object = new JSONObject(true);
+            for (int j=0;j<23;j++){
+                object.put(String.valueOf(j),j);
+            }
+            jsonArray.add(object);
+        }
+
+        System.out.println(jsonArray.toJSONString());
+
     }
 
 
