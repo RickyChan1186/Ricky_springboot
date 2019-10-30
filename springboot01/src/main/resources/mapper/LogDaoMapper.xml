@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ricky.example.dao.LogDao">
+    <insert id="insertLog">
+        INSERT into logtab(log_id,log_method,log_message,log_updatetime) values(#{id},#{method},#{message},now())
+    </insert>
+
+
+
+</mapper>
