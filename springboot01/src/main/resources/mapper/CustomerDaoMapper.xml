@@ -4,5 +4,10 @@
     <insert id="insert" parameterType="com.ricky.example.entity.Customer">
         INSERT into Customer(id,name,address) values(#{id},#{name},#{address})
     </insert>
+    
+    <select id="queryAll" resultType="com.ricky.example.entity.Customer">
+
+        SELECT * FROM customer
+    </select>
 
 </mapper>

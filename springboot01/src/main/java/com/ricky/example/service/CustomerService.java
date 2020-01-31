@@ -1,6 +1,9 @@
 package com.ricky.example.service;
 
 import com.ricky.example.entity.Customer;
+import com.ricky.example.rest.PageResult;
+
+import java.util.List;
 
 /**
  * @author ricky
@@ -10,6 +13,10 @@ import com.ricky.example.entity.Customer;
 public interface CustomerService {
 
     public boolean insert(Customer ctu);
+
+    public List<Customer> queryAll();
+
+    public PageResult<Customer> findPageCustomer(int pageIndex,int pageSize);
 
 
 }
