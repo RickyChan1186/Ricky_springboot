@@ -1,10 +1,12 @@
 package com.ricky.example.entity;
 
+import java.io.Serializable;
+
 /**
  * @author ricky
  * @create 2019-09-09 20:27
  */
-public class Customer {
+public class Customer implements Serializable{
     private Integer id;
     private String name;
     private String address;

@@ -73,5 +73,27 @@ public class testRest {
         }
     }
 
+    @ApiOperation(value = "/testCacheListResult",notes = "缓存测试")
+    @GetMapping(value = "/testCacheListResult")
+    public ListResult<Customer> testCacheListResult(){
+
+        try {
+            long begin = System.currentTimeMillis();
+            List<Customer> customers = customerService.queryAll();
+            long ing = System.currentTimeMillis();
+            customers = customerService.queryAll();
+            long end = System.currentTimeMillis();
+
+            System.out.println("第一次查询耗时："+(ing-begin)+"ms");
+            System.out.println("第一次查询耗时："+(end-ing)+"ms");
+
+            return new ListResult<Customer>(true,"testListResult请求成功！",customers);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ListResult<Customer>(false,"testListResult请求失败！");
+        }
+
+    }
+
 
 }

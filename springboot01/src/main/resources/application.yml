@@ -52,4 +52,5 @@ spring:
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    cache-enabled: true #开启二级缓存机制
   mapper-locations: classpath:mapper/*Mapper.xml
