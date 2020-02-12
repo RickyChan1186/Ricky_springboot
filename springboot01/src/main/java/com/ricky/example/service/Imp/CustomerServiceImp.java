@@ -32,9 +32,27 @@ public class CustomerServiceImp implements CustomerService {
 
     @Override
     public PageResult<Customer> findPageCustomer(int pageIndex, int pageSize) {
+        long startTime = System.currentTimeMillis();
         PageMethod.startPage(pageIndex,pageSize);
-
         List<Customer> customers = customerDao.queryAll();
+        long endTime = System.currentTimeMillis();
+        System.out.println("totoal time:"+(endTime-startTime));
+
+        return ResultFactory.createPageResult(customers);
+    }
+
+    @Override
+    public PageResult<Customer> findPageCustomer2(int pageIndex, int pageSize,Customer customer) {
+        if(customer.getName()==null || "".equals(customer.getName())){
+            customer.setName("R-");
+        }
+
+        long startTime = System.currentTimeMillis();
+        PageMethod.startPage(pageIndex,pageSize);
+        List<Customer> customers = customerDao.queryAllByName(customer);
+        long endTime = System.currentTimeMillis();
+        System.out.println("totoal time:"+(endTime-startTime));
+
         return ResultFactory.createPageResult(customers);
     }
 

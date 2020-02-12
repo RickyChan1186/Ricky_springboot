@@ -14,4 +14,5 @@ public interface CustomerDao {
 
     public List<Customer> queryAll();
 
+    public List<Customer> queryAllByName(Customer customer);
 }

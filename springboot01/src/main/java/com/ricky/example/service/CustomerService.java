@@ -19,4 +19,5 @@ public interface CustomerService {
     public PageResult<Customer> findPageCustomer(int pageIndex,int pageSize);
 
 
+    public PageResult<Customer> findPageCustomer2(int pageIndex,int pageSize,Customer customer);
 }

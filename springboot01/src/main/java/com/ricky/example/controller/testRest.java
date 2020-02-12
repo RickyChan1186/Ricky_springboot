@@ -73,6 +73,19 @@ public class testRest {
         }
     }
 
+
+    @ApiOperation(value = "/testPageResult2",notes = "PageResult类型")
+    @GetMapping(value = "/testPageResult2/{pageIndex}/{pageSize}")
+    public PageResult<Customer> testPageResult2(@PathVariable Integer pageIndex,@PathVariable Integer pageSize,Customer customer){
+        try {
+            PageResult<Customer> customers = customerService.findPageCustomer2(pageIndex,pageSize,customer);
+            return  customers;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new PageResult<>(false,"操作失败--"+e.getMessage());
+        }
+    }
+
     @ApiOperation(value = "/testCacheListResult",notes = "缓存测试")
     @GetMapping(value = "/testCacheListResult")
     public ListResult<Customer> testCacheListResult(){

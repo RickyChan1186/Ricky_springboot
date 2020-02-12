@@ -3,15 +3,15 @@
 <mapper namespace="com.ricky.example.dao.CustomerDao">
 
     <!--根据需求调整缓存参数：-->
-    <cache type="org.mybatis.caches.ehcache.EhcacheCache">
+    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache">
         <property name="timeToIdleSeconds" value="3600"/>
         <property name="timeToLiveSeconds" value="3600"/>
-        <!-- 同ehcache参数maxElementsInMemory -->
+        &lt;!&ndash; 同ehcache参数maxElementsInMemory &ndash;&gt;
         <property name="maxEntriesLocalHeap" value="1000"/>
-        <!-- 同ehcache参数maxElementsOnDisk -->
+        &lt;!&ndash; 同ehcache参数maxElementsOnDisk &ndash;&gt;
         <property name="maxEntriesLocalDisk" value="10000000"/>
         <property name="memoryStoreEvictionPolicy" value="LRU"/>
-    </cache>
+    </cache>-->
 
     <insert id="insert" parameterType="com.ricky.example.entity.Customer">
         INSERT into Customer(id,name,address) values(#{id},#{name},#{address})
@@ -20,6 +20,17 @@
     <select id="queryAll" resultType="com.ricky.example.entity.Customer">
 
         SELECT * FROM customer
+    </select>
+
+    <select id="queryAllByName" resultType="com.ricky.example.entity.Customer">
+
+        SELECT *
+        FROM customer t
+        <where>
+            <if test="name != null and name !=''">
+              t.name like "%"#{name}"%"
+            </if>
+        </where>
     </select>
 
 </mapper>
