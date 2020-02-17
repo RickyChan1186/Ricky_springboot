@@ -3,15 +3,15 @@
 <mapper namespace="com.ricky.example.dao.CustomerDao">
 
     <!--根据需求调整缓存参数：-->
-    <!--<cache type="org.mybatis.caches.ehcache.EhcacheCache">
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache">
         <property name="timeToIdleSeconds" value="3600"/>
         <property name="timeToLiveSeconds" value="3600"/>
-        &lt;!&ndash; 同ehcache参数maxElementsInMemory &ndash;&gt;
+        <!-- 同ehcache参数maxElementsInMemory -->
         <property name="maxEntriesLocalHeap" value="1000"/>
-        &lt;!&ndash; 同ehcache参数maxElementsOnDisk &ndash;&gt;
+        <!-- 同ehcache参数maxElementsOnDisk -->
         <property name="maxEntriesLocalDisk" value="10000000"/>
         <property name="memoryStoreEvictionPolicy" value="LRU"/>
-    </cache>-->
+    </cache>
 
     <insert id="insert" parameterType="com.ricky.example.entity.Customer">
         INSERT into Customer(id,name,address) values(#{id},#{name},#{address})
@@ -19,8 +19,17 @@
     
     <select id="queryAll" resultType="com.ricky.example.entity.Customer">
 
-        SELECT * FROM customer
+        SELECT t.* FROM (select id,name,address from customer where 1=1) t
+
     </select>
+
+    <!--pagehelper-spring-boot-starter 要1.1.3版本之后才能用这种方式自定义count方法-->
+    <select id="queryAll_COUNT" resultType="Long">
+
+        SELECT t.* FROM (select * from customer where 1=1) t
+
+    </select>
+
 
     <select id="queryAllByName" resultType="com.ricky.example.entity.Customer">
 

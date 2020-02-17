@@ -15,6 +15,8 @@ public class User {
     private int id;
     private String name;
     private String phone;
+
+
     @JsonFormat(pattern="yyyy-MM-dd hh:mm:ss",locale="zh",timezone="GMT+8")
     private Date createTime;
 

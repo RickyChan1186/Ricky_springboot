@@ -1,6 +1,7 @@
 package com.ricky.example.controller;
 
 import com.ricky.example.entity.Customer;
+import com.ricky.example.entity.User;
 import com.ricky.example.rest.ListResult;
 import com.ricky.example.rest.PageResult;
 import com.ricky.example.rest.Result;
@@ -13,9 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @author ricky
@@ -39,9 +39,15 @@ public class testRest {
     @GetMapping(value = "/SingleResult")
     public SingleResult<Map> testSingleResult(){
         Map<String,Object> mapObj = new HashMap<>();
-        mapObj.put("A","AAA");
-        mapObj.put("B","BBB");
-        mapObj.put("C",123);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD");
+        Date pastTime = null;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.add(Calendar.DAY_OF_MONTH,2);
+        pastTime = calendar.getTime();
+        mapObj.put("pastTime",sdf.format(pastTime));
+
 
         return new SingleResult<Map>(true,"返回成功",mapObj);
     }
@@ -98,7 +104,7 @@ public class testRest {
             long end = System.currentTimeMillis();
 
             System.out.println("第一次查询耗时："+(ing-begin)+"ms");
-            System.out.println("第一次查询耗时："+(end-ing)+"ms");
+            System.out.println("第二次查询耗时："+(end-ing)+"ms");
 
             return new ListResult<Customer>(true,"testListResult请求成功！",customers);
         } catch (Exception e) {
@@ -107,6 +113,29 @@ public class testRest {
         }
 
     }
+
+    @ApiOperation(value = "/testUserDate",notes = "@JsonFormat和@DateTimeFormat的作用")
+    @GetMapping(value = "/testUserDate")
+    public SingleResult<Map> testUserDate(){
+
+        Map<String,Object> map = new HashMap<>();
+        User user = new User(1,"user-1","address-1",new Date());
+        map.put("user",user);
+
+        return new SingleResult<Map>(true, "success", map);
+    }
+
+
+    @ApiOperation(value = "/testUserDate2",notes = "@JsonFormat和@DateTimeFormat的作用")
+    @GetMapping(value = "/testUserDate2")
+    public SingleResult<Map> testUserDate2(User user){
+
+        Map<String,Object> map = new HashMap<>();
+        map.put("user",user);
+
+        return new SingleResult<Map>(true, "success", map);
+    }
+
 
 
 }
