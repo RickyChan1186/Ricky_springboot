@@ -2,6 +2,8 @@ package com.ricky.service.impl;
 
 import com.ricky.domain.product;
 import com.ricky.service.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -14,6 +16,8 @@ import java.util.*;
 public class ProductServiceImp implements ProductService {
 
     public static final Map<Integer,product> doMap = new HashMap<>();
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     static {
         doMap.put(1,new product(1,"phone",9999,99));
@@ -33,6 +37,7 @@ public class ProductServiceImp implements ProductService {
 
     @Override
     public product findById(int id) {
+        logger.info("findbyId");
         product p = doMap.get(id);
         return p;
     }
