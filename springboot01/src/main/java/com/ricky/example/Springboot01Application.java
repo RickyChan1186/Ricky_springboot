@@ -1,7 +1,6 @@
 package com.ricky.example;
 
 
-import org.apache.activemq.command.ActiveMQQueue;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -14,7 +13,6 @@ import org.springframework.jms.annotation.EnableJms;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-import javax.jms.Queue;
 import javax.servlet.MultipartConfigElement;
 
 @MapperScan("com.ricky.example.dao")
@@ -39,10 +37,5 @@ public class Springboot01Application {
 		return factory.createMultipartConfig();
 	}
 
-	//初始化一个MQ队列的Bean,交给Spring管理,方便后续注入
-	@Bean
-	public Queue queue(){
-		return new ActiveMQQueue("common.queue");
-	}
 
 }

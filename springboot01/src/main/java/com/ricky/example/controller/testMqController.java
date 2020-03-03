@@ -40,5 +40,27 @@ public class testMqController {
         return new Result(true,"消息发送成功");
     }
 
+    @ApiOperation(value = "/testQueue")
+    @GetMapping(value = "/testQueue")
+    public Result testQueue(){
+
+        for(int i=0;i<10;i++){
+            productMqService.sendMessage("点对点队列消息：queue"+i);
+        }
+        return new Result(true,"点对点队列消息发送成功");
+    }
+
+    @ApiOperation(value = "/testTopic")
+    @GetMapping(value = "/testTopic")
+    public Result testTopic(){
+        for(int i=0;i<10;i++){
+            productMqService.sendTopicMessage("订阅队列消息：topic"+i);
+        }
+        return new Result(true,"消息订阅发送成功");
+    }
+
+
+
+
 
 }

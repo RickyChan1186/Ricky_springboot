@@ -11,4 +11,7 @@ public interface ProductMqService {
 
     public void sendMessage(Destination destination, final String message);
     public void sendMessage(final String message);
+    public void sendTopicMessage(final String message);
+
+
 }

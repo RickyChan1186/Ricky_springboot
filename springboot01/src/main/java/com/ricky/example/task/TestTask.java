@@ -1,7 +1,6 @@
 package com.ricky.example.task;
 
 import net.javacrumbs.shedlock.core.SchedulerLock;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -20,13 +19,13 @@ public class TestTask {
     }
 
 
-    @Scheduled(cron = "*/5 * * * * *")
+    //@Scheduled(cron = "*/5 * * * * *")
     @SchedulerLock(name = "channelCronName1", lockAtMostFor = 3*1000)
     public void shedlockMethod1(){
         System.out.println("当前系统时间1："+new Date());
     }
 
-    @Scheduled(cron = "*/3 * * * * *")
+   //@Scheduled(cron = "*/3 * * * * *")
     @SchedulerLock(name = "channelCronName2", lockAtMostFor = 5*1000)
     public void shedlockMethod2(){
         System.out.println("当前系统时间2："+new Date());

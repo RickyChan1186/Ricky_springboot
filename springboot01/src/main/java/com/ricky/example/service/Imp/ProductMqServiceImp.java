@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.jms.Destination;
 import javax.jms.Queue;
+import javax.jms.Topic;
 
 /**
  * @author ricky
@@ -24,6 +25,9 @@ public class ProductMqServiceImp implements ProductMqService {
     @Autowired
     private Queue queue;
 
+    @Autowired
+    private Topic topic;
+
 
     @Override
     public void sendMessage(Destination destination, String message) {
@@ -35,4 +39,11 @@ public class ProductMqServiceImp implements ProductMqService {
         jmsMessagingTemplate.convertAndSend(this.queue,message);
 
     }
+
+    @Override
+    public void sendTopicMessage(String message) {
+        jmsMessagingTemplate.convertAndSend(this.topic,message);
+    }
+
+
 }

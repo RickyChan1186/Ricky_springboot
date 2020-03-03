@@ -13,6 +13,13 @@ spring:
       enabled: true
       max-connections: 100
 
+activemqUrl: tcp://127.0.0.1:61616
+activemqUser: admin
+activemqPassword: admin
+queueName: common.queue
+topicName: common.topic
+
+
 
 
 
