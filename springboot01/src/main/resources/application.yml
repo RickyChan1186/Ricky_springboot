@@ -5,13 +5,13 @@ spring:
     restart:
       trigger-file: trigger.txt
   #整合jms测试，安装在别的机器，防火墙和端口号记得开放
-  activemq:
-    broker-url: tcp://127.0.0.1:61616
-    user: admin
-    password: admin
-    pool:
-      enabled: true
-      max-connections: 100
+#  activemq:
+#    broker-url: tcp://127.0.0.1:61616
+#    user: admin
+#    password: admin
+#    pool:
+#      enabled: true
+#      max-connections: 100
 
 activemqUrl: tcp://127.0.0.1:61616
 activemqUser: admin
