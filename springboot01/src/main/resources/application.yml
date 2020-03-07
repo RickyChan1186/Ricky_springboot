@@ -23,6 +23,7 @@ topicName: common.topic
 
 
 
+
 user.filePath: C:/Users/Ricky/Desktop/image/
 
 #数据库配置#
@@ -50,6 +51,10 @@ spring:
       filters: stat
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       use-global-data-source-stat: true
+      stat-view-servlet:
+        login-username: admin
+        login-password: admin
+
 #  redis:
 #      database: 0          # Redis数据库索引（默认为0）
 #      host: 127.0.0.1  # Redis服务器地址
