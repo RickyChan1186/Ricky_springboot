@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SSE</title>
+    <script type="text/javascript">
+
+        var source=new EventSource("testSSEController/push");
+
+        source.onmessage=function(event)
+        {
+            console.info(event.data);
+            $("#td1").text(event.data);
+        };
+    </script>
+</head>
+<body>
+    <div>
+        SSE随机数的值：<td id="td1"></td>
+    </div>
+
+</body>
+</html>
