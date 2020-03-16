@@ -3,7 +3,6 @@ package com.ricky.example.config;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -15,8 +14,8 @@ import java.util.Arrays;
  * @create 2020-03-14 15:51
  * 日志切面 AOP
  */
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class LogAspect {
     @Pointcut("execution(public * com.ricky.example.controller.*.*(..))")
     public void webLog(){}
