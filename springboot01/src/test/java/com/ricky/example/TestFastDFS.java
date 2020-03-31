@@ -1,6 +1,7 @@
 package com.ricky.example;
 
 import com.alibaba.fastjson.JSON;
+import com.ricky.example.util.FastDFSClient;
 import org.csource.common.NameValuePair;
 import org.csource.fastdfs.*;
 import org.junit.Test;
@@ -76,4 +77,11 @@ public class TestFastDFS {
             ex.printStackTrace();
         }
     }
+
+    @Test
+    public void test(){
+
+        System.out.println( FastDFSClient.getNameValuePairStr("group1/M00/00/00/gcxK5F6CA3iADzseAAAL-H0BZjM276.jpg"));
+    }
+
 }
