@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jms.annotation.EnableJms;
@@ -23,6 +24,7 @@ import javax.servlet.MultipartConfigElement;
 @EnableScheduling
 @EnableAsync
 @EnableJms //开启支持jms
+@EnableCaching //开启缓存机制
 public class Springboot01Application {
 
 	public static void main(String[] args) {

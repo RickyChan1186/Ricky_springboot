@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ricky.example.dao.EmployeeDao">
+
+    <insert id="insert" parameterType="com.ricky.example.entity.Employee">
+        INSERT into employee(id,name,address) values(#{id},#{name},#{address})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM employee t WHERE t.id = #{id}
+    </delete>
+
+    <update id="update" parameterType="com.ricky.example.entity.Employee">
+        UPDATE employee t
+        SET t.name = #{name},t.address = #{address}
+        WHERE  t.id = #{id}
+    </update>
+
+    <select id="findById" resultType="com.ricky.example.entity.Employee">
+        SELECT * FROM employee t WHERE t.id = #{id}
+    </select>
+    
+    <select id="queryAll" resultType="com.ricky.example.entity.Employee">
+        SELECT * FROM employee t
+    </select>
+
+</mapper>

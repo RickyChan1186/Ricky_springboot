@@ -55,17 +55,17 @@ spring:
         login-username: admin
         login-password: admin
 
-#  redis:
-#      database: 0          # Redis数据库索引（默认为0）
-#      host: 127.0.0.1  # Redis服务器地址
-#      port: 6379           # Redis服务器连接端口
-#      password: test123    # Redis服务器连接密码（默认为空）
-#      pool:
-#        jedis:
-#          max-active: 100    # 连接池最大连接数（使用负值表示没有限制）
-#          max-idle: 10       # 连接池中的最大空闲连接
-#          max-wait: 100000   # 连接池最大阻塞等待时间（使用负值表示没有限制）
-#      timeout: 5000
+  redis:
+      database: 0          # Redis数据库索引（默认为0）
+      host: 129.204.74.228  # Redis服务器地址
+      port: 6379           # Redis服务器连接端口
+      password: ccf123456    # Redis服务器连接密码（默认为空）
+      pool:
+        jedis:
+          max-active: 100    # 连接池最大连接数（使用负值表示没有限制）
+          max-idle: 10       # 连接池中的最大空闲连接
+          max-wait: 100000   # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      timeout: 5000
 
 
 #增加打印sql语句，一般用于本地开发测试
@@ -74,3 +74,10 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     cache-enabled: true #开启二级缓存机制
   mapper-locations: classpath:mapper/*Mapper.xml
+
+#定义SpringBoot输出的日志级别
+logging:
+  level:
+    root: info
+
+
