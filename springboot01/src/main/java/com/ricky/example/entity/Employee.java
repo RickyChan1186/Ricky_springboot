@@ -1,12 +1,10 @@
 package com.ricky.example.entity;
 
-import java.io.Serializable;
-
 /**
  * @author ricky
  * @create 2019-09-09 20:27
  */
-public class Employee implements Serializable{
+public class Employee{
     private Integer id;
     private String name;
     private String address;
@@ -49,5 +47,9 @@ public class Employee implements Serializable{
         this.id = id;
         this.name = name;
         this.address = address;
+    }
+
+    public  Employee(){
+
     }
 }

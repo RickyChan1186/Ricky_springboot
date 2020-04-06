@@ -4,7 +4,8 @@ import com.ricky.example.dao.EmployeeDao;
 import com.ricky.example.entity.Employee;
 import com.ricky.example.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * @author ricky
  * @create 2019-09-09 20:44
  */
+@CacheConfig(cacheManager = "empCacheManager") //引入使用的缓存管理，不设置默认使用主缓存管理
 @Service
 public class EmployeeServiceImp implements EmployeeService {
 
@@ -35,7 +37,7 @@ public class EmployeeServiceImp implements EmployeeService {
         return employeeDao.update(employee);
     }
 
-    @CachePut(value = "employee", key = "'employe'.concat(#id.toString())")
+    @Cacheable(cacheNames = {"emp"})
     @Override
     public Employee findById(Integer id) {
         return employeeDao.findById(id);
