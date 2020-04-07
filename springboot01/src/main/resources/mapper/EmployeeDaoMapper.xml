@@ -6,8 +6,9 @@
         INSERT into employee(id,name,address) values(#{id},#{name},#{address})
     </insert>
 
+    <!--mysql的delete语句不能直接用别名在后面-->
     <delete id="delete">
-        DELETE FROM employee t WHERE t.id = #{id}
+        DELETE FROM employee  WHERE id = #{id}
     </delete>
 
     <update id="update" parameterType="com.ricky.example.entity.Employee">
