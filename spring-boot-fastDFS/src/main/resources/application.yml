@@ -1,0 +1,29 @@
+server:
+  port: 18080
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  application:
+    name: fastDFS-Test
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  devtools:
+    restart:
+      trigger-file: trigger.txt
+  rabbitmq:
+    host: 192.168.0.28
+    username: guest
+    password: guest
+
+
+fastdfs:
+  connect_timeout: 2000
+  network_timeout: 10000
+  charset: UTF-8
+  http.tracker_http_port: 80
+  http.anti_steal_token: no
+  http.secret_key: FastDFS1234567890
+  tracker_server: 192.168.0.28:22122
