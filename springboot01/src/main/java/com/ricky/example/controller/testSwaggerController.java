@@ -1,9 +1,14 @@
 package com.ricky.example.controller;
 
 import com.ricky.example.entity.Person;
+import com.ricky.example.rest.SingleResult;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ricky
@@ -95,5 +100,14 @@ public class testSwaggerController {
     @GetMapping("/hello/{name}")
     public String hello(@PathVariable String name){
         return "hello " + name;
+    }
+
+    @ApiOperation(value = "/testDateType",notes = "测试时间参数")
+    @GetMapping(value = "/testDateType")
+    public SingleResult<Map> testDateType( Date firstTime, Date endTime){
+        Map<String,Object> map = new HashMap<>();
+        map.put("firstTime",firstTime);
+        map.put("endTime",endTime);
+        return new SingleResult<Map>(true,"success",map);
     }
 }
