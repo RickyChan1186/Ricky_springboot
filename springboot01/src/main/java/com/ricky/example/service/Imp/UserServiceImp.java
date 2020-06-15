@@ -68,6 +68,12 @@ public class UserServiceImp implements UserService {
         return userDao.findById(id);
     }
 
+    @Override
+    @Transactional
+    public Map<String, Object> findById2(String id) {
+        return userDao.findById2(id);
+    }
+
 
 
 }

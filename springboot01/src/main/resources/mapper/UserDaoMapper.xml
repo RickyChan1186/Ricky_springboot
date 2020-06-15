@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ricky.example.dao.UserDao">
+    <resultMap id="UserMap" type="java.util.HashMap">
+        <id column="user_id" property="user_id"></id>
+        <result column="user_name" property="user_name"></result>
+        <result column="user_age" property="user_age" typeHandler="com.ricky.example.intercepter.EmptyIntIfNull"></result>
+        <result column="user_address" property="user_address" typeHandler="com.ricky.example.intercepter.EmptyStringIfNull"></result>
+
+    </resultMap>
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="user_id">
         INSERT into user(user_id,user_name,user_age,user_address) values(#{id},#{name},#{age},#{address})
     </insert>
@@ -16,6 +23,10 @@
     </update>
     
     <select id="findById" resultType="java.util.HashMap">
+        SELECT * FROM user WHERE user_id = #{id}
+    </select>
+
+    <select id="findById2" resultMap="UserMap">
         SELECT * FROM user WHERE user_id = #{id}
     </select>
 

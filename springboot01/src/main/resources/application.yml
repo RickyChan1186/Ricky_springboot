@@ -72,7 +72,9 @@ spring:
 mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    cache-enabled: true #开启二级缓存机制
+    cache-enabled: true
+    call-setters-on-nulls: true #Map对象能返值为null的字段
+  #开启二级缓存机制
   mapper-locations: classpath:mapper/*Mapper.xml
 
 #定义SpringBoot输出的日志级别

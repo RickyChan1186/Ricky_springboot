@@ -12,5 +12,5 @@ public interface UserDao {
     int delUser(String id);
     int updateUser(Map<String,Object> userMap);
     Map<String,Object> findById(String id);
-
+    Map<String,Object> findById2(String id);
 }

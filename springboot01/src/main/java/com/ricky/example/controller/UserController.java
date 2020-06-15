@@ -49,6 +49,11 @@ public class UserController {
         return userService.findById(id);
     }
 
+    @GetMapping(value = "/findById2")
+    public Object findById2(String id){
+        return userService.findById2(id);
+    }
+
 
 
 }
