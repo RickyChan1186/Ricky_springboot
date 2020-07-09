@@ -1,6 +1,9 @@
 package com.ricky.example.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ricky.example.entity.Person;
+import com.ricky.example.rest.Result;
 import com.ricky.example.rest.SingleResult;
 import io.swagger.annotations.*;
 import org.springframework.http.ResponseEntity;
@@ -109,5 +112,13 @@ public class testSwaggerController {
         map.put("firstTime",firstTime);
         map.put("endTime",endTime);
         return new SingleResult<Map>(true,"success",map);
+    }
+
+    @ApiOperation(value = "/testJsonStr",notes = "测试JSON参数")
+    @PostMapping("/testJsonStr")
+    public Result testJsonStr(String jsonStr){
+        JSONObject jsonObject = JSON.parseObject(jsonStr);
+        System.out.println(jsonObject);
+        return new Result(true,"success");
     }
 }
