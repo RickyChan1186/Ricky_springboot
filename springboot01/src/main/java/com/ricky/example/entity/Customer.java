@@ -50,4 +50,9 @@ public class Customer implements Serializable{
         this.name = name;
         this.address = address;
     }
+
+    public Customer(){
+
+    }
+
 }
