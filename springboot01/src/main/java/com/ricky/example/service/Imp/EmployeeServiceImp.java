@@ -16,8 +16,9 @@ import java.util.List;
  * @author ricky
  * @create 2019-09-09 20:44
  */
-@CacheConfig(cacheManager = "empCacheManager") //引入使用的缓存管理，不设置默认使用主缓存管理
+//@CacheConfig(cacheManager = "empCacheManager") //引入使用的缓存管理，不设置默认使用主缓存管理
 @Service
+@CacheConfig(cacheNames = "emps")
 public class EmployeeServiceImp implements EmployeeService {
 
     @Autowired
@@ -25,6 +26,7 @@ public class EmployeeServiceImp implements EmployeeService {
 
 
     @Override
+    @CacheEvict(value = "allEmp")
     public int insert(Employee employee) {
         return employeeDao.insert(employee);
     }
@@ -41,7 +43,7 @@ public class EmployeeServiceImp implements EmployeeService {
      *     beforeInvocation = true:
      *       代表缓存清除操作是在方法运行之前执行，无论方法出现异常，缓存都会清除
      */
-    @CacheEvict(value = "emp")
+    @CacheEvict(value = "empById",key = "#id")
     @Override
     public int delete(Integer id) {
         return employeeDao.delete(id);
@@ -56,8 +58,8 @@ public class EmployeeServiceImp implements EmployeeService {
      *     key = "#result.id"
      */
 
-    @CachePut(value = "emp",key = "#result.id")
     @Override
+    @CachePut(value = "empById",key = "#root+'findById'+'['+#employee.id+']'")
     public int update(Employee employee) {
         return employeeDao.update(employee);
     }
@@ -87,13 +89,13 @@ public class EmployeeServiceImp implements EmployeeService {
      *       E:unless = "#result == null"
      *    sync：是否采用异步模式
      */
-    @Cacheable(cacheNames = {"emp"})
     @Override
+    @Cacheable(value = "empById",key = "#id")
     public Employee findById(Integer id) {
         return employeeDao.findById(id);
     }
 
-    @Cacheable(cacheNames = {"emp"})
+    @Cacheable(value = "allEmp")
     @Override
     public List<Employee> queryAll() {
         return employeeDao.queryAll();

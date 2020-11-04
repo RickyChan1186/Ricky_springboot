@@ -1,6 +1,7 @@
 package com.ricky.example.filter;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.io.IOException;
  * @author ricky
  * @create 2019-09-04 20:02
  */
-//@WebFilter(urlPatterns = "/api/filter/*",filterName = "LoginFilter")
+@WebFilter(urlPatterns = "/api/filter/*",filterName = "LoginFilter")
 public class LoginFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

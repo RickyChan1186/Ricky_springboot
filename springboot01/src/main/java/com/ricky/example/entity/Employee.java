@@ -1,19 +1,21 @@
 package com.ricky.example.entity;
 
+import java.io.Serializable;
+
 /**
  * @author ricky
  * @create 2019-09-09 20:27
  */
-public class Employee{
-    private Integer id;
+public class Employee implements Serializable{
+    private int id;
     private String name;
     private String address;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
