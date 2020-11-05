@@ -5,18 +5,51 @@
     <title>SSE</title>
     <script type="text/javascript">
 
-        var source=new EventSource("testSSEController/push");
+        /**
+         * 构造方法中传入服务端的接口
+         获取客户端连接对象
+         * @type {EventSource}
+         */
+        var  sourse = new EventSource("http://localhost:8080/see/testSSEController/push");
 
-        source.onmessage=function(event)
-        {
-            console.info(event.data);
-            $("#td1").text(event.data);
-        };
+        //    连接成功时触发该事件监听器
+        sourse.onopen=function (event) {
+            console.log("客户端与服务端连接成功……");
+        }
+
+        //  事件监听器： 服务端响应客户端时（推送消息）时触发事件监听器
+
+        //    如果服务端指定 event: 事件类型时;  客户端需要设置该事件类型的监听器。
+        sourse.onsseMessage=function (event) {
+            console.log(event);
+
+            console.log("推送消的消息"+event.data); //推送的消息
+            $("#td1").val(event.data);
+
+        }
+
+        // 如果服务端不指定 event: 事件类型时; 客户端则使用默认的事件监听器message
+        sourse.onmessage=function (event) {
+            console.log(event);
+
+            console.log("推送消的消息"+event.data); //推送的消息
+            $("#td1").val(event.data);
+        }
+
+        //    执行出错时触发该事件监听器
+        sourse.onerror=function (event) {
+            // console.log(event);
+            console.log("执行出错……");
+        }
+
+
     </script>
 </head>
 <body>
+
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
     <div>
-        SSE随机数的值：<td id="td1"></td>
+        SSE随机数的值：<input id="td1"></input>
     </div>
 
 </body>

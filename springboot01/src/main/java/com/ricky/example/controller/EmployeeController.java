@@ -29,6 +29,26 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
 
+    @ApiOperation(value = "/insert",notes = "插入employee对象")
+    @PostMapping(value = "/insert")
+    public Result insert(int id){
+
+        try {
+            Employee employee = new Employee();
+            employee.setId(id);
+            employee.setName(id+"-aaa");
+            employee.setAddress(id+"-aaa");
+
+            employeeService.insert(employee);
+
+            return new Result(true,"操作成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            return new Result(false,"操作失败");
+        }
+    }
+
     @ApiOperation(value = "/findById",notes = "获取employee对象")
     @GetMapping(value = "/findById")
     public SingleResult findById(int id){
