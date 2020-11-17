@@ -13,6 +13,7 @@ import java.util.concurrent.Future;
 @Component
 public class AsyncTask {
 
+
     @Async
     public void task1() throws InterruptedException {
         long begin = System.currentTimeMillis();
