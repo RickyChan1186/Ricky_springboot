@@ -15,6 +15,7 @@ package com.gitee.flying.cattle.mdg.aid;
  */
 public class Const {
 
+
 	/********************** 响应 ****************************/
 	public static final String CODE_SUCCESS = "200"; // 成功
 	public static final String CODE_FAILED = "0"; // 失败
