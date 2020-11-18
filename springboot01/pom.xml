@@ -192,7 +192,12 @@
 			<artifactId>fastdfs-client-java</artifactId>
 			<version>1.27.0.0</version>
 		</dependency>
-
+		<!--引入MybatisPlus依赖-->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
 	</dependencies>
 
 	<build>
