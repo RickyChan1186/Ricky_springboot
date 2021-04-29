@@ -139,6 +139,10 @@ public class test01 {
                             if(dataMap.containsKey(bookmark.getName())){
 
                                 XWPFRun run = xwpfParagraph.createRun();
+                                //设置字体和大小
+                                run.setFontFamily("楷体_GB2312");
+                                run.setFontSize(15);
+
                                 run.setText(dataMap.get(bookmark.getName()));
 
                                 Node firstNode = bookmark.getDomNode();
