@@ -16,6 +16,8 @@ import java.util.*;
 @SpringBootTest
 public class TestJdk {
 
+    private List<Customer> names = new ArrayList<>();
+
 
     @Test
     public void test01(){
@@ -53,21 +55,18 @@ public class TestJdk {
 
     // 使用 java 8 排序
     private void sortUsingJava8(List<Customer> names){
-        Collections.sort(names, (s1, s2) -> s1.getName().compareTo(s2.getName()));
+        Collections.sort(names, (s1, s2) -> s2.getName().compareTo(s1.getName()));
     }
 
 
     @Test
     public void test02(){
 
-        List<String> names = new ArrayList();
+        names.add(new Customer(1,"aa","aa"));
+        names.add(new Customer(2,"bb","bb"));
+        names.add(new Customer(3,"cc","cc"));
 
-        names.add("Google");
-        names.add("Runoob");
-        names.add("Taobao");
-        names.add("Baidu");
-        names.add("Sina");
-
+        sortUsingJava8(names);
         names.forEach(System.out::println);
     }
 }
