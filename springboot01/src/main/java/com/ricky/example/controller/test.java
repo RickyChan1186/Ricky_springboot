@@ -134,4 +134,24 @@ public class test {
         return new Result(true,"success");
     }
 
+    /**
+     * @Author chenzefan
+     * @Description df df
+     * @Date 14:56 2022/2/7
+     * @Param 
+     * @Return 
+     **/
+    @ApiOperation(value = "/testLogback1")
+    @GetMapping(value = "/testLogback1")
+    public Result testLogback1(){
+
+        logger.debug("debug++++++++++++++++++++++++");
+        logger.info("info++++++++++++++++++++++++");
+        logger.error("error++++++++++++++++++++++++");
+        int id = 2001;
+        String symbol = "debug log";
+        logger.debug("Processing trade with id: {} and symbol: {}", id, symbol);
+        return new Result(true,"success");
+    }
+
 }
