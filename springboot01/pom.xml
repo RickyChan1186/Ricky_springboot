@@ -218,7 +218,12 @@
 			<artifactId>jol-core</artifactId>
 			<version>0.9</version>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.17</version>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

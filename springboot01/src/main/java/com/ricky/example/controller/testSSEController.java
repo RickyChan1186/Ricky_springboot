@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +25,8 @@ public class testSSEController {
     @ApiOperation(value = "/push")
     @GetMapping(value = "/push",produces = "text/event-stream;charset=UTF-8")
     public String push(){
+
+        SseEmitter sseEmitter = new SseEmitter(0L);
         try {
             TimeUnit.SECONDS.sleep(2);
         } catch (InterruptedException e) {
