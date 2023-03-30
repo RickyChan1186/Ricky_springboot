@@ -6,7 +6,11 @@ import org.apache.poi.hwpf.usermodel.Bookmarks;
 import org.apache.poi.hwpf.usermodel.Range;
 import org.apache.poi.xwpf.usermodel.*;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBookmark;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTMarkupRange;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTP;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTTc;
+import org.w3c.dom.Attr;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import java.io.*;
@@ -25,15 +29,17 @@ public class test01 {
 
         try {
 
-            File excel=new File("d:/test.docx");
+            File excel=new File("d:/test.doc");
 
-            FileInputStream is = new FileInputStream(excel);
-            OutputStream outputStream = new FileOutputStream("d:/aa.docx");
+            InputStream is = new FileInputStream(excel);
+            OutputStream outputStream = new FileOutputStream("d:/aa.doc");
+
+
 
             Map<String,String> dataMap = new HashMap<>();
-            dataMap.put("PO_Jzyj","11111111111111111111111111");
+            dataMap.put("PO_Jzyj","aaaaaaaaaaaaaaaaaaa");
 
-            docxOperateTable(is,outputStream,dataMap);
+            docOperate(is,outputStream,dataMap);
 
             is.close();
             outputStream.close();
@@ -116,7 +122,7 @@ public class test01 {
     }
 
 
-    //修改docx文本书签方法
+    //修改docx表格书签方法
     public static void docxOperateTable(InputStream inputStream, OutputStream outputStream, Map<String,String> dataMap) throws IOException {
         XWPFDocument document = new XWPFDocument(inputStream).getXWPFDocument();
 
@@ -180,4 +186,99 @@ public class test01 {
     }
 
 
+
+    //往docx表格指定位置注入内容的方法
+    public static void docxOperateTable2(InputStream inputStream, OutputStream outputStream, Map<String,String> dataMap) throws IOException {
+        XWPFDocument document = new XWPFDocument(inputStream).getXWPFDocument();
+
+        //获取表单List
+        List<XWPFTable> xwpfTableList = document.getTables();
+        //修改中心主任意见批示
+        XWPFTable xwpfTable = xwpfTableList.get(0);
+        XWPFTableRow xwpfTableRow = xwpfTable.getRow(5);
+        XWPFTableCell xwpfTableCell = xwpfTableRow.getCell(0);
+
+        CTTc ctTc = xwpfTableCell.getCTTc();
+        ctTc.setPArray(new CTP[] {CTP.Factory.newInstance()});
+
+
+        //获取每一行每一列中的文本集
+        List<XWPFParagraph> paragraphList = xwpfTableCell.getParagraphs();
+        //把批示内容去掉，再重新注入
+        for(int i=0; i<paragraphList.size(); i++){
+            /*XWPFParagraph xwpfParagraph = paragraphList.get(i);
+            CTBookmark[] ctBookmarks= xwpfParagraph.getCTP().getBookmarkStartArray();
+            for(int j=0; j<ctBookmarks.length; j++){
+                ctBookmarks[j].getId();
+                ctBookmarks[j].getName();
+                if(!ctBookmarks[j].getName().equals("PO_Jzyj")||!ctBookmarks[j].getName().equals("PO_Zxzryj")){
+                    continue;
+                }
+                System.out.println(ctBookmarks[j].getId()+"|"+ctBookmarks[j].getName());
+                xwpfParagraph.getCTP().removeBookmarkStart(Integer.parseInt(ctBookmarks[j].getId().toString()));
+                xwpfParagraph.getCTP().removeBookmarkEnd(Integer.parseInt(ctBookmarks[j].getId().toString()));
+
+            }*/
+
+           // xwpfTableCell.removeParagraph(i);
+        }
+
+        for(int i=1; i<2; i++){
+            XWPFParagraph xwpfParagraph = xwpfTableCell.addParagraph();
+            XWPFRun run = xwpfParagraph.createRun();
+            //设置字体和大小
+            run.setFontFamily("楷体_GB2312");
+            run.setFontSize(15);
+
+            run.setText("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+
+        }
+
+
+
+
+
+        document.write(outputStream);
+        document.close();
+    }
+
+
+    //删除段落内所有的书签 去掉w:bookmarkStart/w:bookmarkEnd
+    public void removeParagraphBookMark(XWPFParagraph para) {
+        List<CTBookmark> bookmarkStartList = para.getCTP()
+                .getBookmarkStartList();
+        if (bookmarkStartList == null) {
+            return;
+        }
+        for (int i = bookmarkStartList.size() - 1; i >= 0; i--) {
+            Node bookStartNode = bookmarkStartList.get(i).getDomNode();
+            printNodeAllAttributeValue(bookStartNode);
+            bookStartNode.getParentNode().removeChild(bookStartNode);
+        }
+        List<CTMarkupRange> bookmarkEndList = para.getCTP()
+                .getBookmarkEndList();
+        if (bookmarkEndList == null) {
+            return;
+        }
+        for (int i = bookmarkEndList.size() - 1; i >= 0; i--) {
+            Node bookEndNode = bookmarkEndList.get(i).getDomNode();
+            printNodeAllAttributeValue(bookEndNode);
+            bookEndNode.getParentNode().removeChild(bookEndNode);
+        }
+
+    }
+
+    public void printNodeAllAttributeValue(Node node) {
+        NamedNodeMap nodeAttr = node.getAttributes();
+        if (nodeAttr != null) {
+            int numAttrs = nodeAttr.getLength();
+            for (int i = 0; i < numAttrs; i++) {
+                Attr attr = (Attr) nodeAttr.item(i);
+                String attrName = attr.getNodeName();
+                String attrValue = attr.getNodeValue();
+                System.out.println(node.getNodeName() + " 属性="
+                        + attrName + " 值= " + attrValue);
+            }
+        }
+    }
 }
