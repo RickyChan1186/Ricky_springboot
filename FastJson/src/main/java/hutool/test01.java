@@ -14,6 +14,8 @@ public class test01 {
     public static void main(String[] args) {
         ChineseDate chineseDate = new ChineseDate(new Date());
         System.out.println(chineseDate.getChineseDay());
+
+        System.out.println("aaaaaaaaaaaaaaaaaaaaa");
     }
 
 
