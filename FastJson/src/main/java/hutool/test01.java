@@ -16,6 +16,8 @@ public class test01 {
         System.out.println(chineseDate.getChineseDay());
 
         System.out.println("aaaaaaaaaaaaaaaaaaaaa");
+        System.out.println("fjfjfjfjfjfjfj");
+
     }
 
 
